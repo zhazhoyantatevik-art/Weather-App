@@ -1,0 +1,270 @@
+/* ============================================
+   Design tokens
+   ============================================ */
+:root {
+  --sky-deep: #0f2545;
+  --sky-mid: #234d76;
+  --sky-light: #5f92b8;
+  --amber: #ffb454;
+  --amber-dark: #e89a3c;
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --text-primary: #f4f8fb;
+  --text-secondary: #b9c8d8;
+  --error-bg: rgba(255, 99, 99, 0.12);
+  --error-border: rgba(255, 99, 99, 0.4);
+  --error-text: #ff9d9d;
+
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+
+  --radius: 18px;
+}
+
+/* ============================================
+   Base
+   ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: radial-gradient(circle at 20% 0%, var(--sky-light) 0%, transparent 45%),
+              linear-gradient(160deg, var(--sky-deep) 0%, var(--sky-mid) 55%, var(--sky-deep) 100%);
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ============================================
+   App shell
+   ============================================ */
+.app {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.app__header {
+  text-align: left;
+}
+
+.app__title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.01em;
+}
+
+.app__subtitle {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ============================================
+   Search bar
+   ============================================ */
+.search {
+  display: flex;
+  gap: 10px;
+}
+
+.search__input {
+  flex: 1;
+  padding: 14px 16px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.search__input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search__input:focus {
+  border-color: var(--amber);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.search__button {
+  padding: 14px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--sky-deep);
+  background: var(--amber);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.search__button:hover {
+  background: var(--amber-dark);
+}
+
+.search__button:active {
+  transform: scale(0.97);
+}
+
+.search__button:focus-visible,
+.search__input:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Loading state
+   ============================================ */
+.state {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+}
+
+.state--loading {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--glass-border);
+  border-top-color: var(--amber);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   Error state
+   ============================================ */
+.state--error {
+  background: var(--error-bg);
+  border: 1px solid var(--error-border);
+  color: var(--error-text);
+}
+
+/* ============================================
+   Weather card
+   ============================================ */
+.weather-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.weather-card__city {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.weather-card__main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 8px 0 4px 0;
+}
+
+.weather-card__icon {
+  font-size: 3.2rem;
+  line-height: 1;
+}
+
+.weather-card__temp {
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  font-weight: 700;
+  color: var(--amber);
+  line-height: 1;
+}
+
+.weather-card__description {
+  margin: 4px 0 24px 0;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.weather-card__details {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail__label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.detail__value {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 420px) {
+  body {
+    padding: 32px 16px;
+  }
+
+  .app__title {
+    font-size: 1.7rem;
+  }
+
+  .weather-card__temp {
+    font-size: 3rem;
+  }
+
+  .weather-card__icon {
+    font-size: 2.6rem;
+  }
+
+  .weather-card__details {
+    gap: 20px;
+  }
+}
